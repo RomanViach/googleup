@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import {NextRequest, NextResponse} from "next/server";
-import {prisma} from "../../db/prisma";
+import prisma from "../../../prisma/prisma";
 export async function POST(req: Request, res: NextApiResponse) {
     const body = await req.json()
     await prisma.passwords.create({
