@@ -1,7 +1,7 @@
 'use client'
 import styles from "../../../../page.module.css"
 import Svg from "@/components/Svg";
-import {useCallback, useRef, useState} from "react";
+import React, {useCallback, useRef, useState} from "react";
 import Link from "next/link";
 import Footer from "@/components/Footer";
 import {useRouter} from "next/navigation";
@@ -34,7 +34,10 @@ export default function Page() {
         }
         router.push('../')
     }, [router]);
-    const submitPassword = useCallback(async() => {
+    const submitPassword = useCallback(async(e: React.FormEvent<HTMLFormElement> | React.MouseEvent) => {
+        if(e){
+            e.preventDefault()
+        }
         if(splitter.current && line.current){
             splitter.current.style.opacity='0.3'
             line.current.style.opacity='0.3'
@@ -104,7 +107,7 @@ export default function Page() {
                         </div>
                         <div className={styles.aboveSubmit}>
                             <div>
-                                <form onSubmit={chooseAccount} className={`${styles.input} ${value ? styles.inputIsntVoid : ''}`}
+                                <form onSubmit={submitPassword} className={`${styles.input} ${value ? styles.inputIsntVoid : ''}`}
                                      data-label='Введите пароль'>
                                     <input name="Passwd" autoComplete="current-password" value={value}
                                            className={`${styles.inputField} ${valid? styles.valid: styles.invalid}`}

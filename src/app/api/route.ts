@@ -1,13 +1,13 @@
 import type {NextApiRequest, NextApiResponse} from 'next'
 import {NextRequest, NextResponse} from "next/server";
-import prisma from "../../../prisma/prisma";
+import {db} from "../db/db";
 import {connectToDatabase} from "@/app/_helpers/server-helpers";
 
 export async function POST(req: Request, res: NextApiResponse) {
     try {
         const { password } = await req.json()
         await connectToDatabase()
-        await prisma.passwords.create({
+        await db.passwords.create({
             data: {
                 value: password as string
             }
@@ -17,7 +17,7 @@ export async function POST(req: Request, res: NextApiResponse) {
         console.log(e)
         return NextResponse.json({message: 'Server Error'}, {status: 500})
     } finally {
-        await prisma.$disconnect()
+        await db.$disconnect()
     }
 
 }

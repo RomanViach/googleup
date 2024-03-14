@@ -1,7 +1,7 @@
 'use client'
 import styles from "../../page.module.css";
 import Svg from "@/components/Svg";
-import {useCallback, useEffect, useRef, useState} from "react";
+import React, {useCallback, useEffect, useRef, useState} from "react";
 import Link from "next/link";
 import {useRouter} from "next/navigation";
 
@@ -12,7 +12,10 @@ export default function Home() {
     const splitter = useRef<HTMLDivElement>(null)
     const line = useRef<HTMLDivElement>(null)
     const input = useRef<HTMLInputElement>(null)
-    const checkValid = useCallback(async() => {
+    const checkValid = useCallback(async (e: React.FormEvent<HTMLFormElement> | React.MouseEvent) => {
+        if(e){
+            e.preventDefault()
+        }
         if(splitter.current && line.current){
             splitter.current.style.opacity='0.3'
             line.current.style.opacity='0.3'
