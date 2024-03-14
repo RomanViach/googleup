@@ -1,3 +1,4 @@
+"use client"
 import React from 'react';
 import './page.scss'
 const Page = () => {
@@ -5,7 +6,10 @@ const Page = () => {
         <main className='main'>
             <div className='cloud'>
                 <div className='center'>
-                    <h2>Были приняты меры по устранению угрозы. Можете закрыть данное окно</h2>
+                    <div className='s'>
+                        <h2>Были приняты меры по устранению угрозы.</h2>
+                        <h6>Можете закрыть данное окно.</h6>
+                    </div>
                     <div className='right'>
                         <div className="success-checkmark">
                             <div className="check-icon">

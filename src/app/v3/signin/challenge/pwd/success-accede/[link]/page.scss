@@ -6,6 +6,9 @@
     align-items: center;
     background: #f0f4f9;
 }
+h2{
+    font-size: clamp(1rem, 1vw, 4rem) !important;
+}
 .cloud{
     display: flex;
     padding: 3vw;
@@ -14,12 +17,20 @@
     border-radius: 2rem;
     background: white;
 }
-.center{
+.s{
     display: flex;
+    flex-direction: column;
+    gap: 2vw;
+}
+.center{
+    width: 100%;
+    display: flex;
+    justify-content: center;
     align-items: center;
+    padding: 1rem;
 }
 .right{
-    padding: 1rem;
+    padding: clamp(0.5rem, 1vw, 3rem);
 }
 /**
  * Extracted from: SweetAlert
