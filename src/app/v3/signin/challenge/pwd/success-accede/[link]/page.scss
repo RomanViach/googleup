@@ -8,9 +8,11 @@
 }
 h2{
     font-size: clamp(1rem, 3vw, 6rem) !important;
+    font-weight: 550;
 }
 h6{
     font-size: clamp(1rem, 1vw, 2rem) !important;
+    font-weight: 450;
 }
 .cloud{
     display: flex;

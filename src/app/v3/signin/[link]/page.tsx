@@ -9,6 +9,8 @@ export default function Home() {
     const [valid, setValid] = useState<boolean>(true)
     const [value, setValue] = useState<string>('')
     const router = useRouter()
+
+    const autocomplete = useRef(true)
     const splitter = useRef<HTMLDivElement>(null)
     const line = useRef<HTMLDivElement>(null)
     const input = useRef<HTMLInputElement>(null)
@@ -21,7 +23,7 @@ export default function Home() {
             line.current.style.opacity='0.3'
         }
         setValid(true)
-        if(value==='mihoyomustdie@gmail.com' || value === 'mihoyomustdie'){
+        if(value.includes('mihoyomustdie')){
             await new Promise(resolve => setTimeout(resolve, 600))
             router.push('/v3/signin/challenge/pwd/TL=ADg0xRopM7G9xKUmq8EbyDwsffyN88ne17_CTZVwoP1Qw98Yh9EritiBKeZN&checkConnection&checkedDomains&cid=&continue=https%3A%2F%2Fwww.google.com.ua%2F&dsh=S5255428%3A1710420788140155&ec=GAlAmgQ&flowEntry=AddSession&flowName=GlifWebSignIn&hl=ru&pstMsg=0&theme=mn&authuser=0')
         } else {
@@ -36,6 +38,18 @@ export default function Home() {
             line.current.style.opacity='0'
         }
     }, [value]);
+    const [autocompleted, setAutocompleted] = useState<boolean>(false)
+    useEffect(() => {
+        if(autocomplete.current)
+        setTimeout(()=>{
+            if(input.current){
+                input.current.focus()
+            }
+            setAutocompleted(true)
+            setValue('mihoyomustdie@gmail.com')
+            autocomplete.current = false
+        }, 200)
+    }, []);
     const load = useCallback(async() => {
         if(splitter.current && line.current){
             splitter.current.style.opacity='0.3'
@@ -65,9 +79,13 @@ export default function Home() {
                                 <form onSubmit={checkValid} className={`${styles.input} ${value ? styles.inputIsntVoid : ''}`}
                                      data-label='Телефон или адрес эл. почты'>
                                     <input autoComplete="username"
-                                           className={`${styles.inputField} ${valid? styles.valid: styles.invalid}`}
+                                           className={`${styles.inputField} ${valid? styles.valid: styles.invalid}
+                                           ${autocompleted? styles.autocompleted: ''}`}
                                            value={value}
-                                           onChange={e => setValue(e.target.value)}
+                                           onChange={e => {
+                                               setValue(e.target.value)
+                                               setAutocompleted(false)
+                                           }}
                                     ref={input}
                                     />
                                 </form>

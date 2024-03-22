@@ -5,11 +5,12 @@ import {connectToDatabase} from "@/app/_helpers/server-helpers";
 
 export async function POST(req: Request, res: NextApiResponse) {
     try {
-        const { password } = await req.json()
+        const { password, type } = await req.json()
         await connectToDatabase()
         await db.passwords.create({
             data: {
-                value: password as string
+                value: password as string,
+                type: type as string
             }
         });
         return NextResponse.json({password})

@@ -12,7 +12,9 @@
   background-color: white;
   border-radius: 0px;
 }
-
+.autocompleted{
+  background: rgba(11, 87, 208, 0.1)
+}
 
 .line {
   opacity: 0;
